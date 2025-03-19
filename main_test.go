@@ -90,7 +90,7 @@ func TestProxyHandler(t *testing.T) {
 
 			// Add headers
 			if tt.targetAPIURL != "" {
-				req.Header.Set("target_api_url", tt.targetAPIURL)
+				req.Header.Set("target-api-url", tt.targetAPIURL)
 			}
 			req.Header.Set("User-Agent", "ProxyTest")
 

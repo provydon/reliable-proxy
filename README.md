@@ -25,7 +25,7 @@ The server runs on port 8080 by default.
 The most flexible way to use Reliable Proxy is by specifying your target API URL in the request header:
 
 ```
-curl -X GET http://localhost:8080/some/path -H "target_api_url: https://target-api.com"
+curl -X GET http://localhost:8080/some/path -H "target-api-url: https://target-api.com"
 ```
 
 This allows you to use a single proxy instance for multiple target APIs without any configuration changes.
@@ -114,7 +114,7 @@ This is useful when you want to use the proxy primarily for a specific API.
 Make requests to the proxy with the Target API URL in the header:
 
 ```
-curl -X GET http://localhost:8080/some/path -H "target_api_url: https://target-api.com"
+curl -X GET http://localhost:8080/some/path -H "target-api-url: https://target-api.com"
 ```
 
 The request will be forwarded to `https://target-api.com/some/path` with all headers, query parameters, and body preserved.
@@ -136,13 +136,13 @@ Response: `{"status":"Reliable Proxy server is running","region":"New York, New 
 ### Make a GET request through the proxy
 ```bash
 curl -X GET "http://localhost:8080/search?q=test" \
-  -H "target_api_url: https://www.google.com"
+  -H "target-api-url: https://www.google.com"
 ```
 
 ### Make a POST request with JSON data
 ```bash
 curl -X POST "http://localhost:8080/api/data" \
-  -H "target_api_url: https://api.example.com" \
+  -H "target-api-url: https://api.example.com" \
   -H "Content-Type: application/json" \
   -d '{"key": "value"}'
 ```
@@ -150,7 +150,7 @@ curl -X POST "http://localhost:8080/api/data" \
 ### Test using a deployed instance on Render (US East)
 ```bash
 curl -X GET "https://reliable-proxy.onrender.com/users" \
-  -H "target_api_url: https://jsonplaceholder.typicode.com"
+  -H "target-api-url: https://jsonplaceholder.typicode.com"
 ```
 
 This will proxy your request through a US East region, allowing you to access US-restricted APIs.
@@ -188,4 +188,4 @@ For full license details, see the [LICENSE](LICENSE) file. If you're interested 
 ## Requirements
 
 - Go 1.16+ (for direct execution)
-- Docker (optional) 
+- Docker (optional)
