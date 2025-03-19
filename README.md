@@ -1,4 +1,4 @@
-# <div align="center">🌐 Reliable Proxy</div>
+# <div align="center">🌍 Reliable Proxy</div>
 
 <div align="center">
 
