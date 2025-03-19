@@ -182,14 +182,14 @@ curl -X POST "http://localhost:8080/api/data" \
 </details>
 
 <details open>
-<summary><b>Test using a deployed instance on Render (US East)</b></summary>
+<summary><b>Test using a deployed instance on Render (US West)</b></summary>
 
 ```bash
 curl -X GET "https://reliable-proxy.onrender.com/users" \
   -H "target-api-url: https://jsonplaceholder.typicode.com"
 ```
 
-This will proxy your request through a US East region, allowing you to access US-restricted APIs.
+This will proxy your request through a US West region, allowing you to access US-restricted APIs.
 </details>
 
 ---
