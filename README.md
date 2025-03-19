@@ -25,6 +25,32 @@ I created this tool while working remotely from Nigeria for a US company, where 
 
 ## 🚀 Quick Start
 
+## 🎮 Live Demo: Access Region-Restricted APIs Instantly!
+
+### Try this yourself: 
+
+**1️⃣ First, try accessing a US-restricted API directly:**
+```bash
+# Try accessing a US-only service API directly - you'll get blocked
+curl -X GET "https://api.hulu.com/v1/shows/popular"
+```
+
+**Result:** ❌ *Access denied - This content is not available in your country.*
+
+**2️⃣ Now, try again using our already deployed proxy in US East:**
+```bash
+# The same request, but through our US-based proxy on Render
+curl -X GET "https://reliable-proxy.onrender.com/v1/shows/popular" \
+  -H "target-api-url: https://api.hulu.com"
+```
+
+**Result:** ✅ *Success! The API responds with content as if you were accessing from the US.*
+
+> 💡 **Without installing anything, you can immediately use our hosted proxy to bypass region restrictions.** Just replace the example API with your actual target API to instantly access region-restricted content from anywhere.
+
+---
+
+
 ### 💻 Running Locally
 
 ```bash
