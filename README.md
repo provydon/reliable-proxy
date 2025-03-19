@@ -1,22 +1,18 @@
-# <div align="center">🌐 Reliable Proxy</div>
+# 🌍 Reliable Proxy
 
-<div align="center">
+[![License: Dual](https://img.shields.io/badge/License-Dual-yellow.svg)](LICENSE)
+[![Go Version](https://img.shields.io/badge/Go-1.22%2B-blue)](https://golang.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](Dockerfile)
 
-[![License: Dual](https://img.shields.io/badge/License-Dual%20License-orange.svg)](LICENSE)
-[![Go Version](https://img.shields.io/badge/Go-1.23%2B-blue.svg)](https://go.dev/dl/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-
-*A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world.*
-
-<img src="https://i.imgur.com/tnzYVcF.png" alt="Proxy Illustration" width="400px"/>
-
-</div>
+> A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world.
 
 ---
 
 ## 🤔 Why Reliable Proxy?
 
-I created this tool while working remotely from Nigeria for a US company, where I faced challenges accessing US-restricted APIs needed for my work. Many popular paid proxies suffer from reliability issues because their IPs get blocked by target services. Reliable Proxy solves this by allowing you to:
+I created this tool while working remotely from Nigeria for a US company, where I faced challenges accessing US-restricted APIs needed for my work. Many popular paid proxies suffer from reliability issues because their IPs get blocked by target services.
+
+### ✨ Reliable Proxy solves this by allowing you to:
 
 - 🚀 Deploy your own proxy in your target region
 - 🔒 Access region-restricted APIs reliably
@@ -26,7 +22,7 @@ I created this tool while working remotely from Nigeria for a US company, where 
 
 ## 🚀 Quick Start
 
-### 🖥️ Running Locally
+### 💻 Running Locally
 
 ```bash
 go run main.go
@@ -44,14 +40,11 @@ curl -X GET http://localhost:8080/some/path -H "target-api-url: https://target-a
 
 This allows you to use a single proxy instance for multiple target APIs without any configuration changes.
 
-The request will be forwarded to `https://target-api.com/some/path` with all headers, query parameters, and body preserved.
+> 💡 The request will be forwarded to `https://target-api.com/some/path` with all headers, query parameters, and body preserved.
 
 ### ⚙️ Environment Configuration
 
-<details>
-<summary>Click to expand environment configuration options</summary>
-
-Alternatively, you can configure a default target API using a `.env` file in the project root. See the provided `.env.example` file for available options:
+Alternatively, you can configure a default target API using a `.env` file in the project root:
 
 ```bash
 # Copy the example file
@@ -72,7 +65,6 @@ When a default target API is configured, you can omit the header:
 ```bash
 curl -X GET http://localhost:8080/some/path
 ```
-</details>
 
 ### 🐳 Running with Docker
 
