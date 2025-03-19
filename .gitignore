@@ -1,0 +1,51 @@
+# Compiled Go binaries and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+proxy-server
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# Project specific files
+.env
+region_cache.txt
+/data
+
+# Editor and IDE files
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+.ionide/
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*~
+*.tmp
+*.swp 
