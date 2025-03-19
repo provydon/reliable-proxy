@@ -29,24 +29,24 @@ I created this tool while working remotely from Nigeria for a US company, where 
 
 ### Try this yourself: 
 
-**1️⃣ First, try accessing a US-restricted API directly:**
+**1️⃣ First, try accessing a US-restricted website directly:**
 ```bash
-# Try accessing a US-only service API directly - you'll get blocked
-curl -X GET "https://api.hulu.com/v1/shows/popular"
+# Try accessing PeacockTV's sports page directly - you'll get blocked outside the US
+curl -X GET "https://www.peacocktv.com/sports"
 ```
 
-**Result:** ❌ *Access denied - This content is not available in your country.*
+**Result:** ❌ *Access denied - "Unavailable In Your Region" page appears*
 
 **2️⃣ Now, try again using our already deployed proxy in US East:**
 ```bash
 # The same request, but through our US-based proxy on Render
-curl -X GET "https://reliable-proxy.onrender.com/v1/shows/popular" \
-  -H "target-api-url: https://api.hulu.com"
+curl -X GET "https://reliable-proxy.onrender.com/sports" \
+  -H "target-api-url: https://www.peacocktv.com"
 ```
 
-**Result:** ✅ *Success! The API responds with content as if you were accessing from the US.*
+**Result:** ✅ *Success! You'll get the full PeacockTV sports page with upcoming events, Premier League, Big Ten basketball, and more - as if you were in the US.*
 
-> 💡 **Without installing anything, you can immediately use our hosted proxy to bypass region restrictions.** Just replace the example API with your actual target API to instantly access region-restricted content from anywhere.
+> 💡 **Without installing anything, you can immediately use our hosted proxy to bypass region restrictions.** Just replace the example with your actual target website to instantly access region-restricted content from anywhere.
 
 ---
 
