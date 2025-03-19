@@ -20,9 +20,21 @@ go run main.go
 
 The server runs on port 8080 by default.
 
+### Specifying Target APIs
+
+The most flexible way to use Reliable Proxy is by specifying your target API URL in the request header:
+
+```
+curl -X GET http://localhost:8080/some/path -H "target_api_url: https://target-api.com"
+```
+
+This allows you to use a single proxy instance for multiple target APIs without any configuration changes.
+
+The request will be forwarded to `https://target-api.com/some/path` with all headers, query parameters, and body preserved.
+
 ### Environment Configuration
 
-You can configure the proxy using a `.env` file in the project root. See the provided `.env.example` file for available options:
+Alternatively, you can configure a default target API using a `.env` file in the project root. See the provided `.env.example` file for available options:
 
 ```
 # Copy the example file
@@ -36,6 +48,12 @@ Example `.env` file contents:
 ```
 TARGET_API_URL=https://api.example.com
 PORT=8080
+```
+
+When a default target API is configured, you can omit the header:
+
+```
+curl -X GET http://localhost:8080/some/path
 ```
 
 ### Running with Docker
