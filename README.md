@@ -1,10 +1,13 @@
-# 🌍 Reliable Proxy
+# <div align="center">🌐 Reliable Proxy</div>
 
-[![License: Dual](https://img.shields.io/badge/License-Dual-yellow.svg)](LICENSE)
-[![Go Version](https://img.shields.io/badge/Go-1.22%2B-blue)](https://golang.org/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](Dockerfile)
+<div align="center">
 
-> A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world.
+[![License: Dual](https://img.shields.io/badge/License-Dual%20License-orange.svg)](LICENSE)
+[![Go Version](https://img.shields.io/badge/Go-1.23%2B-blue.svg)](https://go.dev/dl/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+
+*A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world.*
+</div>
 
 ---
 
