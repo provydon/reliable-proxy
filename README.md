@@ -1,30 +1,44 @@
-# Reliable Proxy
+# <div align="center">🌐 Reliable Proxy</div>
 
-A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world.
+<div align="center">
 
-## Why Reliable Proxy?
+[![License: Dual](https://img.shields.io/badge/License-Dual%20License-orange.svg)](LICENSE)
+[![Go Version](https://img.shields.io/badge/Go-1.23%2B-blue.svg)](https://go.dev/dl/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+
+*A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world.*
+
+<img src="https://i.imgur.com/tnzYVcF.png" alt="Proxy Illustration" width="400px"/>
+
+</div>
+
+---
+
+## 🤔 Why Reliable Proxy?
 
 I created this tool while working remotely from Nigeria for a US company, where I faced challenges accessing US-restricted APIs needed for my work. Many popular paid proxies suffer from reliability issues because their IPs get blocked by target services. Reliable Proxy solves this by allowing you to:
 
-- Deploy your own proxy in your target region
-- Access region-restricted APIs reliably
-- Run it for free on platforms like Render
+- 🚀 Deploy your own proxy in your target region
+- 🔒 Access region-restricted APIs reliably
+- 💸 Run it for free on platforms like Render
 
-## Quick Start
+---
 
-### Running Locally
+## 🚀 Quick Start
 
-```
+### 🖥️ Running Locally
+
+```bash
 go run main.go
 ```
 
 The server runs on port 8080 by default.
 
-### Specifying Target APIs
+### 🎯 Specifying Target APIs
 
 The most flexible way to use Reliable Proxy is by specifying your target API URL in the request header:
 
-```
+```bash
 curl -X GET http://localhost:8080/some/path -H "target-api-url: https://target-api.com"
 ```
 
@@ -32,11 +46,14 @@ This allows you to use a single proxy instance for multiple target APIs without 
 
 The request will be forwarded to `https://target-api.com/some/path` with all headers, query parameters, and body preserved.
 
-### Environment Configuration
+### ⚙️ Environment Configuration
+
+<details>
+<summary>Click to expand environment configuration options</summary>
 
 Alternatively, you can configure a default target API using a `.env` file in the project root. See the provided `.env.example` file for available options:
 
-```
+```bash
 # Copy the example file
 cp .env.example .env
 
@@ -52,25 +69,29 @@ PORT=8080
 
 When a default target API is configured, you can omit the header:
 
-```
+```bash
 curl -X GET http://localhost:8080/some/path
 ```
+</details>
 
-### Running with Docker
+### 🐳 Running with Docker
+
+<details>
+<summary>Click to expand Docker options</summary>
 
 Basic usage:
-```
+```bash
 docker build -t reliable-proxy .
 docker run -p 8080:8080 reliable-proxy
 ```
 
 With environment variables:
-```
+```bash
 docker run -p 8080:8080 -e TARGET_API_URL="https://target-api.com" reliable-proxy
 ```
 
 With persistent region cache and custom .env file:
-```
+```bash
 docker run -p 8080:8080 \
   -v $(pwd)/data:/app/data \
   -v $(pwd)/.env:/app/.env \
@@ -92,28 +113,33 @@ You can uncomment this line if you want to build a Docker image with your config
 3. Build your image: `docker build -t reliable-proxy .`
 
 This is useful for creating pre-configured images for specific APIs or regions, but remember that environment variables in the `.env` file will be visible to anyone who has access to the image.
+</details>
 
-### Setting Default Target API
+### 🔧 Setting Default Target API
 
-You can set a default target API URL using an environment variable:
-
-```
+```bash
 TARGET_API_URL="https://target-api.com" go run main.go
 ```
 
 This is useful when you want to use the proxy primarily for a specific API.
 
-### Deploy to the Cloud (Free Options)
+### ☁️ Deploy to the Cloud (Free Options)
 
-- **Render**: Deploy as a Web Service in your target region
-- **Railway**: Deploy from GitHub repo with region selection
-- **Fly.io**: Deploy with regional selection using their free tier
+| Platform | Description | Region Selection |
+|----------|-------------|------------------|
+| **Render** | Deploy as a Web Service | ✅ Region selection available |
+| **Railway** | Deploy from GitHub repo | ✅ Region selection available |
+| **Fly.io** | Deploy with their free tier | ✅ Regional selection available |
 
-## Usage
+---
+
+## 📚 Usage Examples
+
+### ⚡ Basic Usage
 
 Make requests to the proxy with the Target API URL in the header:
 
-```
+```bash
 curl -X GET http://localhost:8080/some/path -H "target-api-url: https://target-api.com"
 ```
 
@@ -121,41 +147,59 @@ The request will be forwarded to `https://target-api.com/some/path` with all hea
 
 If you've set a default `TARGET_API_URL` environment variable, you can omit the header:
 
-```
+```bash
 curl -X GET http://localhost:8080/some/path
 ```
 
-## Example Curl Commands
+### 🔍 Example Curl Commands
 
-### Check proxy status and region
+<details open>
+<summary><b>Check proxy status and region</b></summary>
+
 ```bash
 curl http://localhost:8080/
 ```
-Response: `{"status":"Reliable Proxy server is running","region":"New York, New York, US"}`
 
-### Make a GET request through the proxy
+Response: 
+```json
+{"status":"Reliable Proxy server is running","region":"New York, New York, US"}
+```
+</details>
+
+<details open>
+<summary><b>Make a GET request through the proxy</b></summary>
+
 ```bash
 curl -X GET "http://localhost:8080/search?q=test" \
   -H "target-api-url: https://www.google.com"
 ```
+</details>
 
-### Make a POST request with JSON data
+<details open>
+<summary><b>Make a POST request with JSON data</b></summary>
+
 ```bash
 curl -X POST "http://localhost:8080/api/data" \
   -H "target-api-url: https://api.example.com" \
   -H "Content-Type: application/json" \
   -d '{"key": "value"}'
 ```
+</details>
 
-### Test using a deployed instance on Render (US East)
+<details open>
+<summary><b>Test using a deployed instance on Render (US East)</b></summary>
+
 ```bash
 curl -X GET "https://reliable-proxy.onrender.com/users" \
   -H "target-api-url: https://jsonplaceholder.typicode.com"
 ```
 
 This will proxy your request through a US East region, allowing you to access US-restricted APIs.
+</details>
 
-## Running Tests
+---
+
+## 🧪 Running Tests
 
 Run the tests with:
 
@@ -165,27 +209,46 @@ go test -v
 
 This will run all the unit tests, including tests for the proxy handler, environment loading, and error handling.
 
-## License
+---
+
+## 📜 License
 
 Reliable Proxy is available under a dual license:
 
-- **Non-Commercial Use**: Free to use, modify, and contribute to for non-commercial purposes
-- **Commercial Use**: Requires a separate license agreement with royalty terms
+- **Non-Commercial Use**: 
+  > ✅ Free to use, modify, and contribute to for non-commercial purposes
+
+- **Commercial Use**: 
+  > 💼 Requires a separate license agreement with royalty terms
 
 For full license details, see the [LICENSE](LICENSE) file. If you're interested in using Reliable Proxy for commercial purposes, please contact the copyright holder to arrange suitable terms.
 
-## Features
+---
 
-- Forwards all HTTP methods (GET, POST, PUT, DELETE, PATCH)
-- Preserves headers and query parameters
-- Handles various content types
-- Region-specific deployment for accessing geo-restricted APIs
-- Automatic region detection with persistent caching
-- Concurrent processing for optimal performance
-- Default target API configuration via environment variable or .env file
-- Simple, single-file implementation
+## ✨ Features
 
-## Requirements
+| Feature | Description |
+|---------|-------------|
+| 🔄 **Full HTTP Support** | Forwards all HTTP methods (GET, POST, PUT, DELETE, PATCH) |
+| 📋 **Preserves Request Data** | Maintains headers and query parameters |
+| 📦 **Content Type Handling** | Handles various content types seamlessly |
+| 🌎 **Region-specific Deployment** | For accessing geo-restricted APIs |
+| 🌐 **Auto Region Detection** | With persistent caching for performance |
+| ⚡ **Concurrent Processing** | For optimal performance under load |
+| ⚙️ **Flexible Configuration** | Environment variables or header-based setup |
+| 📝 **Simple Implementation** | Single-file core for easy deployment |
 
-- Go 1.16+ (for direct execution)
+---
+
+## 📋 Requirements
+
+- Go 1.23+ (for direct execution)
 - Docker (optional)
+
+---
+
+<div align="center">
+<p>Made with ❤️ by <a href="https://github.com/providenceifeosame">Providence Ifeosame</a></p>
+
+<a href="#-reliable-proxy">⬆️ Back to Top</a>
+</div>
