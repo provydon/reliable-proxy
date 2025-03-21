@@ -25,6 +25,49 @@ I created this tool while working remotely from Nigeria for a US company, where 
 
 ## 🚀 Quick Start
 
+### 💾 Installation Options
+
+#### Download Pre-built Binaries (Recommended)
+
+You can download pre-built binaries for your platform from our [GitHub Releases](https://github.com/owner/reliable-proxy/releases) page.
+
+**For macOS/Linux:**
+```bash
+# Download the latest release (replace with your actual OS and architecture)
+curl -L https://github.com/owner/reliable-proxy/releases/latest/download/reliable-proxy_Linux_x86_64.tar.gz -o reliable-proxy.tar.gz
+
+# Extract the binary
+tar -xzf reliable-proxy.tar.gz
+
+# Make it executable and move to your PATH
+chmod +x reliable-proxy
+sudo mv reliable-proxy /usr/local/bin/
+```
+
+**For Windows:**
+Download the ZIP file from the releases page and extract it to a folder in your PATH.
+
+#### Build from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/owner/reliable-proxy.git
+cd reliable-proxy
+
+# Build the executable
+go build -o reliable-proxy
+```
+
+#### Using Docker
+
+```bash
+# Pull the image
+docker pull ghcr.io/owner/reliable-proxy:latest
+
+# Run the container
+docker run -p 8080:8080 ghcr.io/owner/reliable-proxy:latest
+```
+
 ## 🎮 Live Demo: Access Region-Restricted APIs Instantly!
 
 ### Try this yourself: 
