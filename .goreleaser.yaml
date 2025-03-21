@@ -46,13 +46,13 @@ changelog:
       - Merge pull request
       - Merge branch
 
-# Homebrew formula
-brews:
-  - name: reliable-proxy
-    homepage: "https://github.com/owner/reliable-proxy"
-    description: "A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world"
-    license: "MIT"
-    repository:
-      owner: "{{ .Env.HOMEBREW_TAP_OWNER }}"
-      name: "{{ .Env.HOMEBREW_TAP_REPO }}"
-      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}" 
+# Comment out the entire brews section for now since you're not using Homebrew distribution yet
+# brews:
+#   - name: reliable-proxy
+#     homepage: "https://github.com/owner/reliable-proxy"
+#     description: "A simple, reliable proxy service for accessing region-restricted APIs from anywhere in the world"
+#     license: "MIT"
+#     repository:
+#       owner: "{{ .Env.HOMEBREW_TAP_OWNER }}"
+#       name: "{{ .Env.HOMEBREW_TAP_REPO }}"
+#       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}" 
