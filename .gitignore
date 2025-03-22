@@ -5,6 +5,7 @@
 *.so
 *.dylib
 proxy-server
+reliable-proxy
 
 # Test binary, built with `go test -c`
 *.test
