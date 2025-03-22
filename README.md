@@ -29,12 +29,12 @@ I created this tool while working remotely from Nigeria for a US company, where 
 
 #### Download Pre-built Binaries (Recommended)
 
-You can download pre-built binaries for your platform from our [GitHub Releases](https://github.com/owner/reliable-proxy/releases) page.
+You can download pre-built binaries for your platform from our [GitHub Releases](https://github.com/provydon/reliable-proxy/releases) page.
 
 **For macOS/Linux:**
 ```bash
 # Download the latest release (replace with your actual OS and architecture)
-curl -L https://github.com/owner/reliable-proxy/releases/latest/download/reliable-proxy_Linux_x86_64.tar.gz -o reliable-proxy.tar.gz
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Linux_x86_64.tar.gz -o reliable-proxy.tar.gz
 
 # Extract the binary
 tar -xzf reliable-proxy.tar.gz
@@ -51,7 +51,7 @@ Download the ZIP file from the releases page and extract it to a folder in your 
 
 ```bash
 # Clone the repository
-git clone https://github.com/owner/reliable-proxy.git
+git clone https://github.com/provydon/reliable-proxy.git
 cd reliable-proxy
 
 # Build the executable
@@ -62,10 +62,10 @@ go build -o reliable-proxy
 
 ```bash
 # Pull the image
-docker pull ghcr.io/owner/reliable-proxy:latest
+docker pull ghcr.io/provydon/reliable-proxy:latest
 
 # Run the container
-docker run -p 8080:8080 ghcr.io/owner/reliable-proxy:latest
+docker run -p 8080:8080 ghcr.io/provydon/reliable-proxy:latest
 ```
 
 ## 🎮 Live Demo: Access Region-Restricted APIs Instantly!
