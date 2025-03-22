@@ -71,11 +71,7 @@ docker run -p 8080:8080 reliable-proxy
 # Clone and enter the repository
 git clone https://github.com/provydon/reliable-proxy.git && cd reliable-proxy
 
-# Option 1: Build and run the binary
-go build -o reliable-proxy
-./reliable-proxy
-
-# Option 2: Run directly without building
+# Run directly
 go run main.go
 ```
 
@@ -83,14 +79,16 @@ go run main.go
 
 ### Basic Usage
 
-> Note: `target-api-url` tells the proxy which API to forward requests to. Replace `https://target-api.com` with your actual region-restricted API endpoint (e.g., `https://us-api.service.com`).
+> Note: `target-api-url` tells the proxy which API to forward requests to. You'll replace this with your own region-restricted API.
 
 ```bash
-# Make requests through it
-curl "http://localhost:8080/path" -H "target-api-url: https://target-api.com"
+# Ready-to-use example (works immediately)
+curl -X GET "http://localhost:8080/" \
+  -H "target-api-url: https://us-only-api.onrender.com" \
+  -H "Accept: application/geo+json"
 
-# With a default target
-TARGET_API_URL="https://api.example.com" reliable-proxy
+# With a default target (environment variable)
+TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
 ```
 
 ### Live Demo
