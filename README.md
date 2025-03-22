@@ -28,10 +28,25 @@ I created this tool while working remotely from Nigeria for a US company, where 
 ### 1️⃣ Pre-built Binaries (Fastest Method)
 
 ```bash
-# Download for your OS (example: Linux x86_64)
+# For Linux x86_64
 curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Linux_x86_64.tar.gz -o reliable-proxy.tar.gz
 
-# Extract and install
+# For Linux ARM64
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Linux_arm64.tar.gz -o reliable-proxy.tar.gz
+
+# For macOS Intel (x86_64)
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Darwin_x86_64.tar.gz -o reliable-proxy.tar.gz
+
+# For macOS Apple Silicon (ARM64)
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Darwin_arm64.tar.gz -o reliable-proxy.tar.gz
+
+# For Windows x86_64
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Windows_x86_64.zip -o reliable-proxy.zip
+
+# For Windows ARM64
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Windows_arm64.zip -o reliable-proxy.zip
+
+# Extract and install (Linux/macOS)
 tar -xzf reliable-proxy.tar.gz
 chmod +x reliable-proxy
 sudo mv reliable-proxy /usr/local/bin/
