@@ -23,31 +23,67 @@ I created this tool while working remotely from Nigeria for a US company, where 
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Deployment Methods
 
-### 💾 Installation Options
+Choose the deployment method that works best for your needs:
 
-#### Download Pre-built Binaries (Recommended)
+### 1️⃣ Using Pre-built Binaries (Quickest Method)
 
-You can download pre-built binaries for your platform from our [GitHub Releases](https://github.com/provydon/reliable-proxy/releases) page.
+Download a pre-built binary for your platform:
 
-**For macOS/Linux:**
 ```bash
-# Download the latest release (replace with your actual OS and architecture)
+# Download the latest release for your OS (examples below)
+# For Linux x86_64
 curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Linux_x86_64.tar.gz -o reliable-proxy.tar.gz
 
-# Extract the binary
-tar -xzf reliable-proxy.tar.gz
+# For macOS Intel
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Darwin_x86_64.tar.gz -o reliable-proxy.tar.gz
 
-# Make it executable and move to your PATH
-chmod +x reliable-proxy
-sudo mv reliable-proxy /usr/local/bin/
+# For macOS Apple Silicon
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Darwin_arm64.tar.gz -o reliable-proxy.tar.gz
+
+# For Windows
+curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Windows_x86_64.zip -o reliable-proxy.zip
 ```
 
-**For Windows:**
-Download the ZIP file from the releases page and extract it to a folder in your PATH.
+Then install it:
 
-#### Build from Source
+```bash
+# For Linux/macOS:
+tar -xzf reliable-proxy.tar.gz
+chmod +x reliable-proxy
+sudo mv reliable-proxy /usr/local/bin/
+
+# For Windows:
+# Extract the ZIP file and add the executable to your PATH
+```
+
+Run the proxy:
+
+```bash
+# Basic usage
+reliable-proxy
+
+# With a specific target API
+reliable-proxy --target-api-url=https://target-api.com
+```
+
+### 2️⃣ Using Docker (Simple & Portable)
+
+Pull and run the Docker image:
+
+```bash
+# Pull the image
+docker pull ghcr.io/provydon/reliable-proxy:latest
+
+# Run the container
+docker run -p 8080:8080 ghcr.io/provydon/reliable-proxy:latest
+
+# With a target API specified
+docker run -p 8080:8080 -e TARGET_API_URL="https://target-api.com" ghcr.io/provydon/reliable-proxy:latest
+```
+
+### 3️⃣ Building from Source (For Development)
 
 ```bash
 # Clone the repository
@@ -56,19 +92,74 @@ cd reliable-proxy
 
 # Build the executable
 go build -o reliable-proxy
+
+# Run the proxy
+./reliable-proxy
 ```
 
-#### Using Docker
+### 4️⃣ Cloud Deployment Options
+
+#### Deploy to Render (Free Tier Available)
+
+1. Sign up for [Render](https://render.com/)
+2. Create a new Web Service
+3. Connect your GitHub repository or use the pre-built binary
+4. Configure environment variables if needed
+5. Deploy and get your proxy URL
+
+#### Deploy to Railway
+
+1. Sign up for [Railway](https://railway.app/)
+2. Create a new project from GitHub
+3. Select your repository
+4. Configure environment variables
+5. Deploy and get your proxy URL
+
+#### Deploy to Fly.io (Regional selection available)
+
+1. Install the Fly CLI: `curl -L https://fly.io/install.sh | sh`
+2. Log in: `fly auth login`
+3. Create an app: `fly launch`
+4. Choose your region during setup
+5. Deploy: `fly deploy`
+
+---
+
+## 💻 Using Reliable Proxy
+
+Once deployed, you can use Reliable Proxy in several ways:
+
+### Basic Usage
+
+Access your deployed proxy with:
 
 ```bash
-# Pull the image
-docker pull ghcr.io/provydon/reliable-proxy:latest
-
-# Run the container
-docker run -p 8080:8080 ghcr.io/provydon/reliable-proxy:latest
+# Replace with your actual deployment URL or localhost:8080 if running locally
+curl -X GET "https://your-proxy-url.com/some-path" \
+  -H "target-api-url: https://target-api.com"
 ```
 
-## 🎮 Live Demo: Access Region-Restricted APIs Instantly!
+The request will be forwarded to `https://target-api.com/some-path` with all headers, query parameters, and body preserved.
+
+### Setting a Default Target API
+
+You can configure a default target API using environment variables:
+
+```bash
+# When running locally
+TARGET_API_URL="https://target-api.com" reliable-proxy
+
+# For cloud deployments, set the TARGET_API_URL environment variable
+# in your deployment platform's settings
+```
+
+When a default target API is configured, you can omit the header:
+
+```bash
+curl -X GET "https://your-proxy-url.com/some-path"
+```
+
+### 🎮 Live Demo: Access Region-Restricted APIs Instantly!
 
 ### Try this yourself: 
 
@@ -90,110 +181,6 @@ curl -X GET "https://reliable-proxy.onrender.com/sports" \
 **Result:** ✅ *Success! You'll get the full PeacockTV sports page with upcoming events, Premier League, Big Ten basketball, and more - as if you were in the US.*
 
 > 💡 **Without installing anything, you can immediately use our hosted proxy to bypass region restrictions.** Just replace the example with your actual target website to instantly access region-restricted content from anywhere.
-
----
-
-
-### 💻 Running Locally
-
-```bash
-go run main.go
-```
-
-The server runs on port 8080 by default.
-
-### 🎯 Specifying Target APIs
-
-The most flexible way to use Reliable Proxy is by specifying your target API URL in the request header:
-
-```bash
-curl -X GET http://localhost:8080/some/path -H "target-api-url: https://target-api.com"
-```
-
-This allows you to use a single proxy instance for multiple target APIs without any configuration changes.
-
-> 💡 The request will be forwarded to `https://target-api.com/some/path` with all headers, query parameters, and body preserved.
-
-### ⚙️ Environment Configuration
-
-Alternatively, you can configure a default target API using a `.env` file in the project root:
-
-```bash
-# Copy the example file
-cp .env.example .env
-
-# Edit with your configuration
-nano .env
-```
-
-Example `.env` file contents:
-```
-TARGET_API_URL=https://api.example.com
-PORT=8080
-```
-
-When a default target API is configured, you can omit the header:
-
-```bash
-curl -X GET http://localhost:8080/some/path
-```
-
-### 🐳 Running with Docker
-
-<details>
-<summary>Click to expand Docker options</summary>
-
-Basic usage:
-```bash
-docker build -t reliable-proxy .
-docker run -p 8080:8080 reliable-proxy
-```
-
-With environment variables:
-```bash
-docker run -p 8080:8080 -e TARGET_API_URL="https://target-api.com" reliable-proxy
-```
-
-With persistent region cache and custom .env file:
-```bash
-docker run -p 8080:8080 \
-  -v $(pwd)/data:/app/data \
-  -v $(pwd)/.env:/app/.env \
-  reliable-proxy
-```
-
-#### Including .env File in Docker Image
-
-The Dockerfile includes a commented line for copying your .env file directly into the image:
-
-```dockerfile
-# COPY .env ./
-```
-
-You can uncomment this line if you want to build a Docker image with your configuration baked in:
-
-1. Create your `.env` file with your settings
-2. Uncomment the line in Dockerfile
-3. Build your image: `docker build -t reliable-proxy .`
-
-This is useful for creating pre-configured images for specific APIs or regions, but remember that environment variables in the `.env` file will be visible to anyone who has access to the image.
-</details>
-
-### 🔧 Setting Default Target API
-
-```bash
-TARGET_API_URL="https://target-api.com" go run main.go
-```
-
-This is useful when you want to use the proxy primarily for a specific API.
-
-### ☁️ Deploy to the Cloud (Free Options)
-
-| Platform | Description | Region Selection |
-|----------|-------------|------------------|
-| **Render** | Deploy as a Web Service | ✅ Region selection available |
-| **Railway** | Deploy from GitHub repo | ✅ Region selection available |
-| **Fly.io** | Deploy with their free tier | ✅ Regional selection available |
 
 ---
 
