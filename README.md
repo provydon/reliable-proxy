@@ -83,7 +83,7 @@ go run main.go
 
 ```bash
 # Ready-to-use example (works immediately)
-curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/geo+json"
+curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
 
 # With a default target (environment variable)
 TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
@@ -94,7 +94,7 @@ TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
 **Without Proxy (Access Denied):**
 ```bash
 # Try accessing the US-only API directly
-curl -H "Accept: application/geo+json" "https://us-only-api.onrender.com"
+curl -H "Accept: application/json" "https://us-only-api.onrender.com"
 ```
 
 Result:
@@ -105,7 +105,7 @@ Result:
 **With Proxy (Success):**
 ```bash
 # Same request through our proxy
-curl -X GET "https://reliable-proxy.onrender.com/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/geo+json"
+curl -X GET "https://reliable-proxy.onrender.com/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
 ```
 
 Result:
