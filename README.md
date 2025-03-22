@@ -89,10 +89,14 @@ TARGET_API_URL="https://api.example.com" reliable-proxy
 ### Live Demo
 
 ```bash
-# Try our US-based proxy
-curl -X GET "https://reliable-proxy.onrender.com/sports" \
-  -H "target-api-url: https://www.peacocktv.com"
+# Example: Access a US-only API through our proxy 
+# (returns JSON data from a geo-restricted API)
+curl -X GET "https://reliable-proxy.onrender.com/" \
+  -H "target-api-url: https://us-only-api.onrender.com" \
+  -H "Accept: application/geo+json"
 ```
+
+This demonstrates accessing geo-restricted content that would normally return an "Access Denied" error if accessed directly from outside the US.
 
 ## ✨ Key Features
 
