@@ -91,17 +91,27 @@ curl -X GET "http://localhost:8080/" \
 TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
 ```
 
-### Live Demo
+### See It In Action
 
+**Without Proxy (Access Denied):**
 ```bash
-# Example: Access a US-only API through our proxy 
-# (returns JSON data from a geo-restricted API)
+# Try accessing the US-only API directly
+curl -H "Accept: application/geo+json" "https://us-only-api.onrender.com"
+
+# Result:
+{"error":"Access restricted to US only."}
+```
+
+**With Proxy (Success):**
+```bash
+# Same request through our proxy
 curl -X GET "https://reliable-proxy.onrender.com/" \
   -H "target-api-url: https://us-only-api.onrender.com" \
   -H "Accept: application/geo+json"
-```
 
-This demonstrates accessing geo-restricted content that would normally return an "Access Denied" error if accessed directly from outside the US.
+# Result:
+{"message":"Hello from the US-only API!"}
+```
 
 ## ✨ Key Features
 
