@@ -84,6 +84,8 @@ curl "http://localhost:8080/path" -H "target-api-url: https://target-api.com"
 TARGET_API_URL="https://api.example.com" reliable-proxy
 ```
 
+> Note: `target-api-url` tells the proxy which API to forward requests to. Replace `https://target-api.com` with your actual region-restricted API endpoint (e.g., `https://us-api.service.com`).
+
 ### Live Demo
 
 ```bash
