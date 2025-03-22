@@ -68,8 +68,15 @@ docker run -p 8080:8080 reliable-proxy
 ### 3️⃣ From Source
 
 ```bash
+# Clone and enter the repository
 git clone https://github.com/provydon/reliable-proxy.git && cd reliable-proxy
+
+# Option 1: Build and run the binary
 go build -o reliable-proxy
+./reliable-proxy
+
+# Option 2: Run directly without building
+go run main.go
 ```
 
 ## 💻 Usage
