@@ -218,7 +218,7 @@ func main() {
 		port = "8080"
 	}
 	
-	log.Printf("Reliable Proxy running on :%s", port)
+	log.Printf("Reliable Proxy running on port :%s", port)
 	
 	go func() {
 		fetchAndCacheRegion()
