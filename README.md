@@ -45,11 +45,16 @@ curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reli
 
 # For Windows ARM64
 curl -L https://github.com/provydon/reliable-proxy/releases/latest/download/reliable-proxy_Windows_arm64.zip -o reliable-proxy.zip
+```
 
+```bash
 # Extract and install (Linux/macOS)
 tar -xzf reliable-proxy.tar.gz
 chmod +x reliable-proxy
 sudo mv reliable-proxy /usr/local/bin/
+
+# Start the proxy
+reliable-proxy
 ```
 
 ### 2️⃣ Using Docker
@@ -72,9 +77,6 @@ go build -o reliable-proxy
 ### Basic Usage
 
 ```bash
-# Start the proxy
-reliable-proxy
-
 # Make requests through it
 curl "http://localhost:8080/path" -H "target-api-url: https://target-api.com"
 
