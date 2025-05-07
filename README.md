@@ -13,7 +13,7 @@
 
 ## 🤔 Why Reliable Proxy?
 
-I created this tool while working remotely from Nigeria for a US company, where I faced challenges accessing US-restricted APIs needed for my work. Many popular paid proxies suffer from reliability issues because their IPs get blocked by target services.
+I created this tool while working remotely from My country for a US company, where I faced challenges accessing US-restricted APIs needed for my work. Many popular paid proxies suffer from reliability issues because their IPs get blocked by target services.
 
 ### ✨ Reliable Proxy solves this by allowing you to:
 
