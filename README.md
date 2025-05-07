@@ -22,20 +22,6 @@ I created this tool while working remotely from My country for a US company, whe
 - 💸 Run it for free on platforms like Render
 
 ---
-## 💻 Usage
-
-### Basic Usage
-
-> Note: `target-api-url` tells the proxy which API to forward requests to. You'll replace this with your own region-restricted API.
-
-```bash
-# Ready-to-use example (works immediately)
-curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
-
-# With a default target (environment variable)
-TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
-```
-
 ### See It In Action
 
 **Without Proxy (Access Denied):**
@@ -119,6 +105,20 @@ git clone https://github.com/provydon/reliable-proxy.git && cd reliable-proxy
 # Run directly
 go run main.go
 ```
+## 💻 Usage
+
+### Basic Usage
+
+> Note: `target-api-url` tells the proxy which API to forward requests to. You'll replace this with your own region-restricted API.
+
+```bash
+# Ready-to-use example (works immediately)
+curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
+
+# With a default target (environment variable)
+TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
+```
+
 
 ## 🛠️ Troubleshooting
 
