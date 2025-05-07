@@ -22,6 +22,51 @@ I created this tool while working remotely from My country for a US company, whe
 - 💸 Run it for free on platforms like Render
 
 ---
+## 💻 Usage
+
+### Basic Usage
+
+> Note: `target-api-url` tells the proxy which API to forward requests to. You'll replace this with your own region-restricted API.
+
+```bash
+# Ready-to-use example (works immediately)
+curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
+
+# With a default target (environment variable)
+TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
+```
+
+### See It In Action
+
+**Without Proxy (Access Denied):**
+```bash
+# Try accessing the US-only API directly
+curl -H "Accept: application/json" "https://us-only-api.onrender.com"
+```
+
+Result:
+```json
+{"error":"Access restricted to US only."}
+```
+
+**With Proxy (Success):**
+```bash
+# Same request through our proxy
+curl -X GET "https://reliable-proxy.onrender.com/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
+```
+
+Result:
+```json
+{"message":"Hello from the US-only API!"}
+```
+
+## ✨ Key Features
+
+- 🌎 **Region-specific deployment** for accessing geo-restricted APIs
+- 🔄 **Full HTTP support** (GET, POST, PUT, DELETE, PATCH)
+- 📋 **Preserves headers and query parameters** 
+- 🌐 **Auto region detection** with caching
+- ⚙️ **Flexible configuration** via environment or headers
 
 ## 🚀 Quick Installation
 
@@ -74,52 +119,6 @@ git clone https://github.com/provydon/reliable-proxy.git && cd reliable-proxy
 # Run directly
 go run main.go
 ```
-
-## 💻 Usage
-
-### Basic Usage
-
-> Note: `target-api-url` tells the proxy which API to forward requests to. You'll replace this with your own region-restricted API.
-
-```bash
-# Ready-to-use example (works immediately)
-curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
-
-# With a default target (environment variable)
-TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
-```
-
-### See It In Action
-
-**Without Proxy (Access Denied):**
-```bash
-# Try accessing the US-only API directly
-curl -H "Accept: application/json" "https://us-only-api.onrender.com"
-```
-
-Result:
-```json
-{"error":"Access restricted to US only."}
-```
-
-**With Proxy (Success):**
-```bash
-# Same request through our proxy
-curl -X GET "https://reliable-proxy.onrender.com/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
-```
-
-Result:
-```json
-{"message":"Hello from the US-only API!"}
-```
-
-## ✨ Key Features
-
-- 🌎 **Region-specific deployment** for accessing geo-restricted APIs
-- 🔄 **Full HTTP support** (GET, POST, PUT, DELETE, PATCH)
-- 📋 **Preserves headers and query parameters** 
-- 🌐 **Auto region detection** with caching
-- ⚙️ **Flexible configuration** via environment or headers
 
 ## 🛠️ Troubleshooting
 
