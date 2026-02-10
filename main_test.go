@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"os"
 	"strings"
 	"testing"
@@ -27,20 +28,22 @@ func TestProxyHandler(t *testing.T) {
 		path           string
 		method         string
 		targetAPIURL   string
+		useQueryTarget bool
 		envTargetAPI   string
 		expectedStatus int
 		expectedBody   string
 	}{
 		{
-			name:           "GET request with header target API",
+			name:           "GET request with query param target",
 			path:           "/test/path",
 			method:         "GET",
 			targetAPIURL:   targetServer.URL,
+			useQueryTarget: true,
 			expectedStatus: http.StatusOK,
 			expectedBody:   `{"path":"/test/path","method":"GET"`,
 		},
 		{
-			name:           "POST request with header target API",
+			name:           "POST request with header target",
 			path:           "/api/data",
 			method:         "POST",
 			targetAPIURL:   targetServer.URL,
@@ -55,14 +58,14 @@ func TestProxyHandler(t *testing.T) {
 			expectedBody:   `{"status":"Reliable Proxy server is running"`,
 		},
 		{
-			name:           "Missing target API URL",
+			name:           "Missing target",
 			path:           "/api/data",
 			method:         "GET",
 			expectedStatus: http.StatusBadRequest,
-			expectedBody:   `{"error":"Missing target_api_url header or TARGET_API_URL environment variable"}`,
+			expectedBody:   `{"error":"Missing target (query param, header, or TARGET env)"}`,
 		},
 		{
-			name:           "GET request with env target API",
+			name:           "GET request with env target",
 			path:           "/test/env",
 			method:         "GET",
 			envTargetAPI:   targetServer.URL,
@@ -75,22 +78,28 @@ func TestProxyHandler(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// Set environment variable if needed
 			if tt.envTargetAPI != "" {
-				oldEnv := os.Getenv("TARGET_API_URL")
-				os.Setenv("TARGET_API_URL", tt.envTargetAPI)
-				defer os.Setenv("TARGET_API_URL", oldEnv)
+				oldEnv := os.Getenv("TARGET")
+				os.Setenv("TARGET", tt.envTargetAPI)
+				defer os.Setenv("TARGET", oldEnv)
 			} else {
-				os.Unsetenv("TARGET_API_URL")
+				os.Unsetenv("TARGET")
+			}
+
+			// Build request URL (add target as query param when useQueryTarget)
+			requestPath := tt.path
+			if tt.useQueryTarget && tt.targetAPIURL != "" {
+				requestPath = tt.path + "?target=" + url.QueryEscape(tt.targetAPIURL)
 			}
 
 			// Create request
-			req, err := http.NewRequest(tt.method, tt.path, nil)
+			req, err := http.NewRequest(tt.method, requestPath, nil)
 			if err != nil {
 				t.Fatalf("Could not create request: %v", err)
 			}
 
-			// Add headers
-			if tt.targetAPIURL != "" {
-				req.Header.Set("target-api-url", tt.targetAPIURL)
+			// Add target via header when not using query param
+			if tt.targetAPIURL != "" && !tt.useQueryTarget {
+				req.Header.Set("target", tt.targetAPIURL)
 			}
 			req.Header.Set("User-Agent", "ProxyTest")
 

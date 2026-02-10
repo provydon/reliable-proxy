@@ -143,14 +143,14 @@ func respondWithError(w http.ResponseWriter, msg string, code int) {
 }
 
 func proxyHandler(w http.ResponseWriter, r *http.Request) {
-	targetAPIURL := r.Header.Get("target-api-url")
+	targetAPIURL := r.URL.Query().Get("target")
 	if targetAPIURL == "" {
-		targetAPIURL = r.URL.Query().Get("target")
+		targetAPIURL = r.Header.Get("target")
 	}
 	if targetAPIURL == "" {
-		targetAPIURL = os.Getenv("TARGET_API_URL")
+		targetAPIURL = os.Getenv("TARGET")
 	}
-	
+
 	if r.URL.Path == "/" && targetAPIURL == "" {
 		w.Header().Set("Content-Type", "application/json")
 		
@@ -168,7 +168,7 @@ func proxyHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	
 	if targetAPIURL == "" {
-		respondWithError(w, "Missing target-api-url header or TARGET_API_URL environment variable", http.StatusBadRequest)
+		respondWithError(w, "Missing target (query param, header, or TARGET env)", http.StatusBadRequest)
 		return
 	}
 
@@ -189,7 +189,7 @@ func proxyHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	excludedHeaders := map[string]bool{"host": true, "target-api-url": true}
+	excludedHeaders := map[string]bool{"host": true, "target": true}
 	for name, values := range r.Header {
 		if !excludedHeaders[strings.ToLower(name)] {
 			proxyReq.Header[name] = values

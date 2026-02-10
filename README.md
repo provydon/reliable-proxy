@@ -37,9 +37,8 @@ Result:
 
 **With Proxy (Success):**
 ```bash
-# Same request through our proxy (header or query param)
-curl -X GET "https://reliable-proxy.onrender.com/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
-# or: curl "https://reliable-proxy.onrender.com/?target=https://us-only-api.onrender.com"
+# Same request through our proxy (query param)
+curl "https://reliable-proxy.onrender.com/?target=https://us-only-api.onrender.com"
 ```
 
 Result:
@@ -53,7 +52,7 @@ Result:
 - 🔄 **Full HTTP support** (GET, POST, PUT, DELETE, PATCH)
 - 📋 **Preserves headers and query parameters** 
 - 🌐 **Auto region detection** with caching
-- ⚙️ **Flexible configuration** via header, query param (`target`), or environment variable
+- ⚙️ **Flexible configuration** via query param, header, or env (all use `target` / `TARGET`)
 
 ## 🚀 Quick Installation
 
@@ -110,17 +109,17 @@ go run main.go
 
 ### Basic Usage
 
-> The target API URL can be set via **header** (`target-api-url`), **query parameter** (`target`), or **environment variable** (`TARGET_API_URL`). Header takes precedence, then query param, then env.
+> Pass the API to proxy via the **query param** `target`, the **header** `target`, or the **env var** `TARGET`. Query is checked first.
 
 ```bash
-# Via header
-curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
-
-# Via query parameter (handy for links or when you can't set headers)
+# Simple: query param (e.g. links, browser, any client)
 curl "http://localhost:8080/?target=https://us-only-api.onrender.com"
 
-# With a default target (environment variable)
-TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
+# Or via header
+curl -X GET "http://localhost:8080/" -H "target: https://us-only-api.onrender.com" -H "Accept: application/json"
+
+# Or set a default with env
+TARGET="https://us-only-api.onrender.com" reliable-proxy
 ```
 
 ## 🛠️ Troubleshooting
