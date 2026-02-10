@@ -145,6 +145,9 @@ func respondWithError(w http.ResponseWriter, msg string, code int) {
 func proxyHandler(w http.ResponseWriter, r *http.Request) {
 	targetAPIURL := r.Header.Get("target-api-url")
 	if targetAPIURL == "" {
+		targetAPIURL = r.URL.Query().Get("target")
+	}
+	if targetAPIURL == "" {
 		targetAPIURL = os.Getenv("TARGET_API_URL")
 	}
 	
@@ -175,7 +178,10 @@ func proxyHandler(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, "Invalid URL: "+err.Error(), http.StatusBadRequest)
 		return
 	}
-	parsedURL.RawQuery = r.URL.RawQuery
+	// Forward query string but strip target param so upstream doesn't see it
+	q := r.URL.Query()
+	q.Del("target")
+	parsedURL.RawQuery = q.Encode()
 
 	proxyReq, err := http.NewRequest(r.Method, parsedURL.String(), r.Body)
 	if err != nil {

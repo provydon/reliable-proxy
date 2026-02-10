@@ -37,8 +37,9 @@ Result:
 
 **With Proxy (Success):**
 ```bash
-# Same request through our proxy
+# Same request through our proxy (header or query param)
 curl -X GET "https://reliable-proxy.onrender.com/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
+# or: curl "https://reliable-proxy.onrender.com/?target=https://us-only-api.onrender.com"
 ```
 
 Result:
@@ -52,7 +53,7 @@ Result:
 - 🔄 **Full HTTP support** (GET, POST, PUT, DELETE, PATCH)
 - 📋 **Preserves headers and query parameters** 
 - 🌐 **Auto region detection** with caching
-- ⚙️ **Flexible configuration** via environment or headers
+- ⚙️ **Flexible configuration** via header, query param (`target`), or environment variable
 
 ## 🚀 Quick Installation
 
@@ -109,16 +110,18 @@ go run main.go
 
 ### Basic Usage
 
-> Note: `target-api-url` tells the proxy which API to forward requests to. You'll replace this with your own region-restricted API.
+> The target API URL can be set via **header** (`target-api-url`), **query parameter** (`target`), or **environment variable** (`TARGET_API_URL`). Header takes precedence, then query param, then env.
 
 ```bash
-# Ready-to-use example (works immediately)
+# Via header
 curl -X GET "http://localhost:8080/" -H "target-api-url: https://us-only-api.onrender.com" -H "Accept: application/json"
+
+# Via query parameter (handy for links or when you can't set headers)
+curl "http://localhost:8080/?target=https://us-only-api.onrender.com"
 
 # With a default target (environment variable)
 TARGET_API_URL="https://us-only-api.onrender.com" reliable-proxy
 ```
-
 
 ## 🛠️ Troubleshooting
 
